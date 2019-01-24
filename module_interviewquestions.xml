@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_interviewquestions" default="compile.module.interviewquestions">
+  <dirname property="module.interviewquestions.basedir" file="${ant.file.module_interviewquestions}"/>
+  
+  <property name="module.jdk.home.interviewquestions" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.interviewquestions" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.interviewquestions" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.interviewquestions" value="-encoding UTF-8 -source 11 -target 11 ${compiler.args}"/>
+  
+  <property name="interviewquestions.output.dir" value="${module.interviewquestions.basedir}/out/production/InterviewQuestions"/>
+  <property name="interviewquestions.testoutput.dir" value="${module.interviewquestions.basedir}/out/test/InterviewQuestions"/>
+  
+  <path id="interviewquestions.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="interviewquestions.module.production.classpath">
+    <path refid="${module.jdk.classpath.interviewquestions}"/>
+    <pathelement location="${path.variable.maven_repository}/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-api/5.0.0/junit-jupiter-api-5.0.0.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/platform/junit-platform-commons/1.0.0/junit-platform-commons-1.0.0.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/opentest4j/opentest4j/1.0.0/opentest4j-1.0.0.jar"/>
+  </path>
+  
+  <path id="interviewquestions.runtime.production.module.classpath">
+    <pathelement location="${interviewquestions.output.dir}"/>
+    <pathelement location="${path.variable.maven_repository}/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-api/5.0.0/junit-jupiter-api-5.0.0.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/platform/junit-platform-commons/1.0.0/junit-platform-commons-1.0.0.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/opentest4j/opentest4j/1.0.0/opentest4j-1.0.0.jar"/>
+  </path>
+  
+  <path id="interviewquestions.module.classpath">
+    <path refid="${module.jdk.classpath.interviewquestions}"/>
+    <pathelement location="${interviewquestions.output.dir}"/>
+    <pathelement location="${path.variable.maven_repository}/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-api/5.0.0/junit-jupiter-api-5.0.0.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/platform/junit-platform-commons/1.0.0/junit-platform-commons-1.0.0.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/opentest4j/opentest4j/1.0.0/opentest4j-1.0.0.jar"/>
+  </path>
+  
+  <path id="interviewquestions.runtime.module.classpath">
+    <pathelement location="${interviewquestions.testoutput.dir}"/>
+    <pathelement location="${interviewquestions.output.dir}"/>
+    <pathelement location="${path.variable.maven_repository}/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-api/5.0.0/junit-jupiter-api-5.0.0.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/platform/junit-platform-commons/1.0.0/junit-platform-commons-1.0.0.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/opentest4j/opentest4j/1.0.0/opentest4j-1.0.0.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.interviewquestions">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.interviewquestions">
+    <patternset refid="excluded.from.module.interviewquestions"/>
+  </patternset>
+  
+  <path id="interviewquestions.module.sourcepath">
+    <dirset dir="${module.interviewquestions.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.interviewquestions" depends="compile.module.interviewquestions.production,compile.module.interviewquestions.tests" description="Compile module InterviewQuestions"/>
+  
+  <target name="compile.module.interviewquestions.production" depends="register.custom.compilers" description="Compile module InterviewQuestions; production classes">
+    <mkdir dir="${interviewquestions.output.dir}"/>
+    <javac2 destdir="${interviewquestions.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.interviewquestions}/javac">
+      <compilerarg line="${compiler.args.interviewquestions}"/>
+      <bootclasspath refid="interviewquestions.module.bootclasspath"/>
+      <classpath refid="interviewquestions.module.production.classpath"/>
+      <src refid="interviewquestions.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.interviewquestions"/>
+    </javac2>
+    
+    <copy todir="${interviewquestions.output.dir}">
+      <fileset dir="${module.interviewquestions.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.interviewquestions.tests" depends="register.custom.compilers,compile.module.interviewquestions.production" description="compile module InterviewQuestions; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.interviewquestions" description="cleanup module">
+    <delete dir="${interviewquestions.output.dir}"/>
+    <delete dir="${interviewquestions.testoutput.dir}"/>
+  </target>
+</project>
