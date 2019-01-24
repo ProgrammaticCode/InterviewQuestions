@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class TestCases {
+    //Test for duplicates expected results.
     private GoogleQuestions checkForDuplicates = new GoogleQuestions();
     private int[] arrayToCheck = {5, 1, 3, 5, 6, 3, 2};
 
