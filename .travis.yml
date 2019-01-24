@@ -3,5 +3,5 @@ java
 mvn test -B
 jdk:
 - oraclejdk11
- 
+ mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
