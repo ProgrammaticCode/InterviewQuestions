@@ -2,6 +2,6 @@ language:
 java
 mvn test -B
 jdk:
-  - oraclejdk11
+- oraclejdk11
  
 
